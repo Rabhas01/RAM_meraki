@@ -1,6 +1,6 @@
 # Rising Above Marketing Website
 
-Welcome to the official repository for the Rising Above Marketing website. This project is designed to showcase our digital marketing services and provide a dynamic user experience using modern web technologies
+Welcome to the official repository for the Rising Above Marketing website. This project is designed to showcase our digital marketing services and provide a dynamic user experience using modern web technologies.
 
 ## Project Overview
 
