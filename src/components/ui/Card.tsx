@@ -4,7 +4,8 @@ import './test.css'
 interface CardProps {
   imageSrc: string;
   title: string;
-  link: string;
+  link?: string;
+  description?: string; 
 }
 
 const Card: React.FC<CardProps> = ({ imageSrc, title, link }) => {
