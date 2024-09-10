@@ -73,6 +73,10 @@ const ServicesSection: React.FC = () => {
             link="/seo"
           />
         </div>
+
+        <TestimonialCarousel />
+        <CallToAction />
+        <FAQSection />
       </div>
     </section>
   );
