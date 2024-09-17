@@ -34,7 +34,7 @@ const DynamicVideo: React.FC<DynamicVideoProps> = ({
       // First ScrollTrigger: Handles the expansion and parallax effect until the video reaches the center
       ScrollTrigger.create({
         trigger: videoElement,
-        start: 'top 90%',        // Animation starts when the top of the video is at 90% of the viewport height
+        start: 'top bottom', // Animation starts when the top of the video reaches the bottom of the viewport
         end: 'center center',    // Animation ends when the video is centered in the viewport
         scrub: true,             // Synchronizes the animation with the scrollbar position
         onUpdate: (self) => {
