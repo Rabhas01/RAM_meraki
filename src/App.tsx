@@ -31,7 +31,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/Ram_meraki">
       <div>
         <AnimatePresence mode="wait">
           {showWelcome ? (
