@@ -1,80 +1,177 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { Draggable } from 'gsap/Draggable';
-
-gsap.registerPlugin(Draggable);
+import React, { useRef, useEffect } from 'react';
 
 const TextMovement: React.FC = () => {
-  const textRef1 = useRef<HTMLDivElement>(null);
-  const textRef2 = useRef<HTMLDivElement>(null);
+  const line1Ref = useRef<HTMLDivElement>(null);
+  const line1ContentRef = useRef<HTMLDivElement>(null);
+
+  const line2Ref = useRef<HTMLDivElement>(null);
+  const line2ContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const textElement1 = textRef1.current;
-    const textElement2 = textRef2.current;
+    const setupScrolling = (
+      container: HTMLDivElement | null,
+      content: HTMLDivElement | null,
+      direction: number
+    ) => {
+      if (!container || !content) return;
 
-    // Ensure the text elements have sufficient width to create a seamless loop
-    const updateTextWidth = () => {
-      if (textElement1 && textElement2) {
-        const textWidth1 = textElement1.scrollWidth;
-        const textWidth2 = textElement2.scrollWidth;
+      let isDragging = false;
+      let startX = 0;
+      let animationId: number;
+      const speed = 1 * direction; // Adjust the speed as needed
 
-        gsap.to(textElement1, {
-          x: `-${textWidth1}px`,
-          repeat: -1,
-          duration: 30,
-          ease: 'linear',
-        });
+      // Duplicate content multiple times for seamless looping
+      content.innerHTML += content.innerHTML + content.innerHTML; // Duplicate more times if needed
 
-        gsap.to(textElement2, {
-          x: `${textWidth2}px`,
-          repeat: -1,
-          duration: 30,
-          ease: 'linear',
-        });
-      }
+      // Get the content width (since we duplicated 3 times)
+      const contentWidth = content.scrollWidth / 3;
+
+      // Set initial position
+      content.style.transform = `translateX(0px)`;
+
+      const startAnimation = () => {
+        cancelAnimationFrame(animationId);
+        const animate = () => {
+          const style = getComputedStyle(content);
+          const matrix = new DOMMatrix(style.transform);
+          let transformX = matrix.m41;
+
+          // Update position
+          transformX += speed;
+
+          // Wrap the transformX value
+          transformX = ((transformX % contentWidth) + contentWidth) % contentWidth - contentWidth;
+
+          content.style.transform = `translateX(${transformX}px)`;
+
+          animationId = requestAnimationFrame(animate);
+        };
+        animationId = requestAnimationFrame(animate);
+      };
+
+      const stopAnimation = () => {
+        cancelAnimationFrame(animationId);
+      };
+
+      const onMouseDown = (e: MouseEvent) => {
+        isDragging = true;
+        const style = getComputedStyle(content);
+        const matrix = new DOMMatrix(style.transform);
+        const transformX = matrix.m41;
+        startX = e.pageX - transformX;
+        stopAnimation();
+      };
+
+      const onMouseMove = (e: MouseEvent) => {
+        if (!isDragging) return;
+        let x = e.pageX - startX;
+
+        // Wrap the x value
+        x = ((x % contentWidth) + contentWidth) % contentWidth - contentWidth;
+
+        content.style.transform = `translateX(${x}px)`;
+      };
+
+      const onMouseUp = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        startAnimation();
+      };
+
+      const onTouchStart = (e: TouchEvent) => {
+        isDragging = true;
+        const style = getComputedStyle(content);
+        const matrix = new DOMMatrix(style.transform);
+        const transformX = matrix.m41;
+        startX = e.touches[0].pageX - transformX;
+        stopAnimation();
+      };
+
+      const onTouchMove = (e: TouchEvent) => {
+        if (!isDragging) return;
+        let x = e.touches[0].pageX - startX;
+
+        // Wrap the x value
+        x = ((x % contentWidth) + contentWidth) % contentWidth - contentWidth;
+
+        content.style.transform = `translateX(${x}px)`;
+      };
+
+      const onTouchEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        startAnimation();
+      };
+
+      container.addEventListener('mousedown', onMouseDown);
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+
+      container.addEventListener('touchstart', onTouchStart);
+      window.addEventListener('touchmove', onTouchMove);
+      window.addEventListener('touchend', onTouchEnd);
+
+      startAnimation();
+
+      // Cleanup event listeners on unmount
+      return () => {
+        stopAnimation();
+        container.removeEventListener('mousedown', onMouseDown);
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+
+        container.removeEventListener('touchstart', onTouchStart);
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('touchend', onTouchEnd);
+      };
     };
 
-    updateTextWidth();
+    const cleanup1 = setupScrolling(
+      line1Ref.current,
+      line1ContentRef.current,
+      -1
+    );
+    const cleanup2 = setupScrolling(line2Ref.current, line2ContentRef.current, 1);
 
-    // Make texts draggable
-    Draggable.create(textElement1, {
-      type: 'x',
-      inertia: true,
-      onDrag: function() {
-        if (this.endX > 0) {
-          this.endX = 0;
-        }
-      },
-    });
-
-    Draggable.create(textElement2, {
-      type: 'x',
-      inertia: true,
-      onDrag: function() {
-        if (this.endX < 0) {
-          this.endX = 0;
-        }
-      },
-    });
-
+    // Cleanup on unmount
     return () => {
-      gsap.killTweensOf([textElement1, textElement2]);
+      cleanup1 && cleanup1();
+      cleanup2 && cleanup2();
     };
   }, []);
 
   return (
     <>
-      <div className="relative overflow-hidden py-8">
-        <div className="absolute top-0 left-0 w-full whitespace-nowrap flex" ref={textRef1}>
-          <div className="flex-shrink-0 px-8 text-6xl font-bold text-white tracking-wider">
-            Digital Growth, Delivered. Digital Growth, Delivered. Digital Growth, Delivered.
+      {/* First Text Line */}
+      <div
+        className="relative overflow-hidden py-8 mb-8 h-28 cursor-grab"
+        ref={line1Ref}
+      >
+        <div
+          className="absolute top-0 left-0 whitespace-nowrap flex"
+          ref={line1ContentRef}
+          style={{ willChange: 'transform' }}
+        >
+          {/* Text Content */}
+          <div className="flex-shrink-0 px-8 text-8xl text-white tracking-wider">
+            Digital Growth, Delivered.&nbsp;
           </div>
         </div>
       </div>
-      <div className="relative overflow-hidden py-8">
-        <div className="absolute top-0 right-0 w-full whitespace-nowrap flex" ref={textRef2}>
-          <div className="flex-shrink-0 px-8 text-6xl font-bold text-white tracking-wider">
-            Innovative Solutions, Measurable Results. Innovative Solutions, Measurable Results.
+
+      {/* Second Text Line */}
+      <div
+        className="relative overflow-hidden py-8 h-24 cursor-grab"
+        ref={line2Ref}
+      >
+        <div
+          className="absolute top-0 left-0 whitespace-nowrap flex"
+          ref={line2ContentRef}
+          style={{ willChange: 'transform' }}
+        >
+          {/* Text Content */}
+          <div className="flex-shrink-0 px-8 text-8xl text-white tracking-wider">
+            Innovative Solutions, Measurable Results.&nbsp;
           </div>
         </div>
       </div>
