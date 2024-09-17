@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 // import 'App.css'; // Make sure to import the CSS file
 
 const UfoWithBeam: React.FC = () => (
