@@ -26,8 +26,8 @@ const TestimonialCarousel: React.FC = () => {
       <Carousel>
         {testimonials.map((testimonial, index) => (
           <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
-            <p className="text-lg mb-4">"{testimonial.text}"</p>
-            <p className="font-bold">{testimonial.name}</p>
+            <p className="text-lg mb-4 text-gray-600">"{testimonial.text}"</p>
+            <p className="font-bold text-gray-600">{testimonial.name}</p>
             <p className="text-sm text-gray-600">{testimonial.company}</p>
           </div>
         ))}
