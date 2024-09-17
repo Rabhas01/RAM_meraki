@@ -7,7 +7,7 @@ const ContentCreation: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <video
             className="w-full h-full object-cover"
-            src="src/assets/video/your-background-video.mp4"
+            src={`${import.meta.env.BASE_URL}assets/video/your-background-video.mp4`}
             autoPlay
             loop
             muted

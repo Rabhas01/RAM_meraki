@@ -17,7 +17,7 @@ const ServicesSection: React.FC = () => {
 
         {/* Use the DynamicVideo component */}
         <DynamicVideo
-          videoSrc="src/assets/video/8474608-hd_1920_1080_30fps.mp4"
+          videoSrc={`${import.meta.env.BASE_URL}assets/video/8474608-hd_1920_1080_30fps.mp4`}
           initialWidth={1}     // Starting from 1% width
           maxWidth={95}        // Expanding to 95% width
           initialHeight={20}   // Starting from 20vh height
@@ -40,31 +40,35 @@ const ServicesSection: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 uppercase font-mono mt-8">
-        <Card 
-          imageSrc="src/assets/Brand-images/cropped-website design.png"
-          title="Website building"
-          link="/website-design-and-development"
-        />
-        <Card 
-          imageSrc="src/assets/Brand-images/website design.png"
-          title="Social Media Management"
-          link="/social-media-management"
-        />
-        <Card 
-          imageSrc="src/assets/Brand-images/pexels-brunoscramgnon-11361901.jpg"
-          title="Advertising"
-          link="/content-creation"
-        />
-        <Card 
-          imageSrc="src/assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg"
-          title="Design Services"
-          link="/learn-more-4"
-        />
-        <Card 
-          imageSrc="src/assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg"
-          title="SEO optimization"
-          link="/seo"
-        />
+      <Card 
+        imageSrc={`${import.meta.env.BASE_URL}assets/Brand-images/cropped-website design.png`}
+        title="Website building"
+        link="/website-design-and-development"
+      />
+
+      <Card 
+        imageSrc={`${import.meta.env.BASE_URL}assets/Brand-images/website design.png`}
+        title="Social Media Management"
+        link="/social-media-management"
+      />
+
+      <Card 
+        imageSrc={`${import.meta.env.BASE_URL}assets/Brand-images/pexels-brunoscramgnon-11361901.jpg`}
+        title="Advertising"
+        link="/content-creation"
+      />
+
+      <Card 
+        imageSrc={`${import.meta.env.BASE_URL}assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg`}
+        title="Design Services"
+        link="/learn-more-4"
+      />
+
+      <Card 
+        imageSrc={`${import.meta.env.BASE_URL}assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg`}
+        title="SEO optimization"
+        link="/seo"
+      />
       </div>
 
       <TestimonialCarousel />

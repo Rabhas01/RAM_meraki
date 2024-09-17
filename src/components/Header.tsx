@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi';
 import "../App.css";
+import ServicesHoverAccordion from './ui/ServiceHoverAccordion';
 
 const logoVariants = {
   hidden: {
@@ -64,7 +65,7 @@ const Header: React.FC = () => {
         {location.pathname === '/' ? (
           <ScrollLink to="home" smooth={true} duration={800} className="hover:text-gray-400 cursor-pointer">
             <motion.img
-              src="src/assets/Brand-images/ram_logo_desktop.png"
+              src={`${import.meta.env.BASE_URL}assets/Brand-images/ram_logo_desktop.png`}
               alt="SMMA Logo"
               className="logo_brand"
               initial={shouldAnimate ? "hidden" : false}
@@ -79,7 +80,11 @@ const Header: React.FC = () => {
           </ScrollLink>
         ) : (
           <Link to="/" className="hover:text-gray-400 cursor-pointer">
-            <img src="src/assets/Brand-images/ram_logo_desktop.png" alt="SMMA Logo" className="logo_brand" />
+            <img
+              src={`${import.meta.env.BASE_URL}assets/Brand-images/ram_logo_desktop.png`}
+              alt="SMMA Logo"
+              className="logo_brand"
+            />
           </Link>
         )}
       </div>
@@ -98,15 +103,7 @@ const Header: React.FC = () => {
             )}
           </li>
           <li>
-            {location.pathname === '/' ? (
-              <ScrollLink to="services" smooth={true} duration={800} className="nav-item">
-                Services
-              </ScrollLink>
-            ) : (
-              <Link to="/services" className="nav-item">
-                Services
-              </Link>
-            )}
+            <ServicesHoverAccordion />
           </li>
           <li>
             {location.pathname === '/' ? (
