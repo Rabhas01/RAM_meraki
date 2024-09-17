@@ -17,11 +17,6 @@ const Map: React.FC = () => {
       // Snazzy Map Styles (if needed)
 
       // Initialize the map
-      const map = new window.google.maps.Map(document.getElementById("map") as HTMLElement, {
-        center: { lat: 40.712776, lng: -74.005974 }, // Example coordinates
-        zoom: 10,
-        styles: [/* Insert Snazzy Map styles here if you have any */]
-      });
     };
 
     loadMap();
