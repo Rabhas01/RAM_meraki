@@ -54,7 +54,7 @@ const HeroSection: React.FC = () => {
       {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        src={`${import.meta.env.BASE_URL}assets/Parallax_images/test.mp4`}
+        src="/assets/Parallax_images/test.mp4"
         autoPlay
         muted
         loop
@@ -63,7 +63,7 @@ const HeroSection: React.FC = () => {
       {/* Overlay Image */}
       <img
         className="absolute inset-0 w-full h-full object-cover"
-        src={`${import.meta.env.BASE_URL}assets/Parallax_images/mountains_dark.png`}
+        src="/assets/Parallax_images/mountains_dark.png"
         alt="Overlay"
       />
 

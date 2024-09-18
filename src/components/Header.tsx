@@ -65,7 +65,7 @@ const Header: React.FC = () => {
         {location.pathname === '/' ? (
           <ScrollLink to="home" smooth={true} duration={800} className="hover:text-gray-400 cursor-pointer">
             <motion.img
-              src={`${import.meta.env.BASE_URL}assets/Brand-images/ram_logo_desktop.png`}
+              src="/assets/Brand-images/ram_logo_desktop.png"
               alt="SMMA Logo"
               className="logo_brand"
               initial={shouldAnimate ? "hidden" : false}
@@ -81,7 +81,7 @@ const Header: React.FC = () => {
         ) : (
           <Link to="/" className="hover:text-gray-400 cursor-pointer">
             <img
-              src={`${import.meta.env.BASE_URL}assets/Brand-images/ram_logo_desktop.png`}
+              src="/assets/Brand-images/ram_logo_desktop.png"
               alt="SMMA Logo"
               className="logo_brand"
             />

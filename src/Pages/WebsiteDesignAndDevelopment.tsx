@@ -43,7 +43,7 @@ const WebsiteDesignAndDevelopment: React.FC = () => {
           {/* Portfolio items would go here */}
           <div className="relative">
             <img
-              src={`${import.meta.env.BASE_URL}assets/images/project1.jpg`}
+              src="assets/images/project1.jpg"
               alt="Project 1"
               className="w-full h-full object-cover rounded-lg"
             />
@@ -53,7 +53,7 @@ const WebsiteDesignAndDevelopment: React.FC = () => {
           </div>
           <div className="relative">
             <img
-              src={`${import.meta.env.BASE_URL}assets/images/project2.jpg`}
+              src="assets/images/project2.jpg"
               alt="Project 2"
               className="w-full h-full object-cover rounded-lg"
             />
@@ -63,7 +63,7 @@ const WebsiteDesignAndDevelopment: React.FC = () => {
           </div>
           <div className="relative">
             <img
-              src={`${import.meta.env.BASE_URL}assets/images/project3.jpg`}
+              src="assets/images/project3.jpg"
               alt="Project 3"
               className="w-full h-full object-cover rounded-lg"
             />

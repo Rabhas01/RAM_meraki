@@ -7,7 +7,7 @@ const SocialMediaManagement: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <video
             className="w-full h-full object-cover"
-            src={`${import.meta.env.BASE_URL}assets/video/8474608-hd_1920_1080_30fps.mp4`}
+            src="assets/video/8474608-hd_1920_1080_30fps.mp4"
             autoPlay
             loop
             muted
