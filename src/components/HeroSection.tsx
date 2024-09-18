@@ -5,7 +5,7 @@ import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 // Register the plugin
 gsap.registerPlugin(MotionPathPlugin);
 
-const satellite = `${import.meta.env.BASE_URL}assets/Parallax_images/Satellite_RAM.png`;
+const satellite = "/assets/Parallax_images/Satellite_RAM.png"
 
 const HeroSection: React.FC = () => {
   const satelliteRef = useRef<HTMLImageElement>(null);
