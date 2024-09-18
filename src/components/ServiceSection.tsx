@@ -3,25 +3,25 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    icon: "src/assets/icons/web-development-icon-for-marketing-website-service%20(2).svg",
+    icon: "/assets/icons/web-development-icon-for-marketing-website-service%20(2).svg",
     title: "Website Development",
     description: "We provide design, upgrades, and management for compelling designs that remain effective in the digital realm.",
     link: "/website-design-and-development"
   },
   {
-    icon: "src/assets/icons/a-web-designing-illustration-for-a--website-using-.svg",
+    icon: "/assets/icons/a-web-designing-illustration-for-a--website-using-.svg",
     title: "Design Services",
     description: "Our design services include a comprehensive brand kit for a consistent identity, including colours, logos, and image guidelines.",
     link: "/design-services"
   },
   {
-    icon: "src/assets/icons/marketing-icon.svg",
+    icon: "/assets/icons/marketing-icon.svg",
     title: "Marketing",
     description: "To maximise your company's online presence, we provide marketing material production, SEO, market research, ad creation, and implementation.",
     link: "/marketing"
   },
   {
-    icon: "src/assets/icons/social-media-icon-for-marketing-website-service-se (1).svg",
+    icon: "/assets/icons/social-media-icon-for-marketing-website-service-se (1).svg",
     title: "Social Media Management",
     description: "By continuous, interesting content and strategic audience targeting, our social media management service enhances your online presence.",
     link: "/social-media-management"
