@@ -9,23 +9,23 @@ const services = [
     link: "/website-design-and-development"
   },
   {
-    icon: "/assets/icons/a-web-designing-illustration-for-a--website-using-.svg",
-    title: "Design Services",
-    description: "Our design services include a comprehensive brand kit for a consistent identity, including colours, logos, and image guidelines.",
-    link: "/design-services"
-  },
-  {
     icon: "/assets/icons/marketing-icon.svg",
     title: "Marketing",
     description: "To maximise your company's online presence, we provide marketing material production, SEO, market research, ad creation, and implementation.",
     link: "/marketing"
   },
   {
+    icon: "/assets/icons/a-web-designing-illustration-for-a--website-using-.svg",
+    title: "Design Services",
+    description: "Our design services include a comprehensive brand kit for a consistent identity, including colours, logos, and image guidelines.",
+    link: "/design-services"
+  },
+  {
     icon: "/assets/icons/social-media-icon-for-marketing-website-service-se (1).svg",
     title: "Social Media Management",
     description: "By continuous, interesting content and strategic audience targeting, our social media management service enhances your online presence.",
     link: "/social-media-management"
-  },
+  }
 ];
 
 const ServicesSection: React.FC = () => {
