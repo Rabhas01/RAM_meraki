@@ -159,15 +159,9 @@ const Header: React.FC = () => {
                 )}
               </li>
               <li>
-                {location.pathname === '/' ? (
-                  <ScrollLink to="services" smooth={true} duration={800} className="nav-item" onClick={() => setIsMenuOpen(false)}>
-                    Services
-                  </ScrollLink>
-                ) : (
                   <Link to="/services" className="nav-item" onClick={() => setIsMenuOpen(false)}>
                     Services
                   </Link>
-                )}
               </li>
               <li>
                 {location.pathname === '/' ? (
