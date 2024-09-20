@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'; // Import useLocation
 import "./App.css";
 import Header from "@/components/Header";
 import Footer from "./components/Footer";
@@ -14,6 +14,16 @@ import { AnimatePresence } from "framer-motion";
 import ErrorBoundary from './ErrorBoundary';
 
 const WELCOME_SCREEN_DURATION = 2200; // Time the welcome screen is shown in milliseconds
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on page load or route change
+  }, [pathname]);
+
+  return null;
+};
 
 const App: React.FC = () => {
   const [showWelcome, setShowWelcome] = useState(false);
@@ -34,6 +44,7 @@ const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <Router>
+        <ScrollToTop /> {/* Add ScrollToTop component */}
         <div>
           <AnimatePresence mode="wait">
             {showWelcome ? (
@@ -44,7 +55,6 @@ const App: React.FC = () => {
                 <Routes>
                   <Route path="/" element={
                     <>
-                    {/* <ParallaxSection /> */}
                       <HeroSection />
                       <AboutSection />
                       <ServicesSection />
@@ -57,7 +67,7 @@ const App: React.FC = () => {
                 <Footer />
               </>
             )}
-            </AnimatePresence>
+          </AnimatePresence>
         </div>
       </Router>
     </ErrorBoundary>
