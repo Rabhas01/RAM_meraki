@@ -12,7 +12,7 @@ const AboutSection: React.FC = () => {
             Welcome to <span className="font-semibold">Rising Above Marketing (RAM)</span>, based in Montreal, Canada. We specialize in cutting-edge social media marketing and web design solutions tailored to your business needs. 
             <a href="#contact" className="text-blue-500 font-semibold hover:underline"> Contact RAM today</a> and let us help you rise above the competition.
           </p>
-          <div className='max-w-md'>AI integration
+          <div className='hidden md:block md:max-w-md'>AI integration
             <p>Lorem ipsum dolor sit amet consectetur</p>
             <p>Lorem ipsum dolor sit amet consectetur</p>
             <p>Lorem ipsum dolor sit amet consectetur</p>
