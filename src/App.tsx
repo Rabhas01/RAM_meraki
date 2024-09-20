@@ -11,6 +11,7 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import Index from './components/Preloader/index';
 import ServiceRoutes from './routes/Routes';
 import { AnimatePresence } from "framer-motion";
+import ErrorBoundary from './ErrorBoundary';
 
 const WELCOME_SCREEN_DURATION = 2200; // Time the welcome screen is shown in milliseconds
 
@@ -31,33 +32,35 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Router>
-      <div>
-        <AnimatePresence mode="wait">
-          {showWelcome ? (
-            <Index key="welcome-screen" />
-          ) : (
-            <>
-              <Header />
-              <Routes>
-                <Route path="/" element={
-                  <>
-                  {/* <ParallaxSection /> */}
-                    <HeroSection />
-                    <AboutSection />
-                    <ServicesSection />
-                    <TestimonialsSection />
-                    <ContactSection />
-                  </>
-                } />
-                <Route path="/*" element={<ServiceRoutes />} />
-              </Routes>
-              <Footer />
-            </>
-          )}
-          </AnimatePresence>
-      </div>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <div>
+          <AnimatePresence mode="wait">
+            {showWelcome ? (
+              <Index key="welcome-screen" />
+            ) : (
+              <>
+                <Header />
+                <Routes>
+                  <Route path="/" element={
+                    <>
+                    {/* <ParallaxSection /> */}
+                      <HeroSection />
+                      <AboutSection />
+                      <ServicesSection />
+                      <TestimonialsSection />
+                      <ContactSection />
+                    </>
+                  } />
+                  <Route path="/*" element={<ServiceRoutes />} />
+                </Routes>
+                <Footer />
+              </>
+            )}
+            </AnimatePresence>
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 };
 
