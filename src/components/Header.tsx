@@ -133,7 +133,7 @@ const Header: React.FC = () => {
       {/* Mobile Menu */}
       <div className="lg:hidden">
         <button
-          className="text-3xl focus:outline-none"
+          className="text-3xl focus:outline-none text-white"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Menu"
         >
