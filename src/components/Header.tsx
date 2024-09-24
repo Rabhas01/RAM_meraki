@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, MutableRefObject } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi';
 import "../App.css";
 import ServicesHoverAccordion from './ui/ServiceHoverAccordion';
+import MobileMenu from './ui/MobileMenu';
 
 const logoVariants = {
   hidden: {
@@ -19,7 +19,11 @@ const logoVariants = {
   }
 };
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  panelRef: MutableRefObject<HTMLDivElement | null>;  // Define the type for panelRef
+}
+
+const Header: React.FC<HeaderProps> = ({ panelRef }) => {
   const [isScrolled, setIsScrolled] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollThreshold = 200;
@@ -131,64 +135,7 @@ const Header: React.FC = () => {
       </nav>
 
       {/* Mobile Menu */}
-      <div className="lg:hidden">
-        <button
-          className="text-3xl focus:outline-none text-white"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Menu"
-        >
-          {isMenuOpen ? <HiOutlineX /> : <HiOutlineMenuAlt3 />}
-        </button>
-
-        {isMenuOpen && (
-          <div
-            ref={menuRef}
-            className="menu-popup absolute top-16 right-4 w-64 h-auto bg-neutral-800 text-white text-xl rounded-lg shadow-lg p-6 z-50 transition-all duration-300 ease-in-out"
-            style={{ maxHeight: '50vh' }} // This limits the height of the menu popup
-          >
-            <ul className="flex flex-col space-y-4">
-              <li>
-                {location.pathname === '/' ? (
-                  <ScrollLink to="home" smooth={true} duration={800} className="nav-item" onClick={() => setIsMenuOpen(false)}>
-                    Home
-                  </ScrollLink>
-                ) : (
-                  <Link to="/" className="nav-item" onClick={() => setIsMenuOpen(false)}>
-                    Home
-                  </Link>
-                )}
-              </li>
-              <li>
-                  <Link to="/services" className="nav-item" onClick={() => setIsMenuOpen(false)}>
-                    Services
-                  </Link>
-              </li>
-              <li>
-                {location.pathname === '/' ? (
-                  <ScrollLink to="about" smooth={true} duration={800} className="nav-item" onClick={() => setIsMenuOpen(false)}>
-                    About
-                  </ScrollLink>
-                ) : (
-                  <Link to="/#about" className="nav-item" onClick={() => setIsMenuOpen(false)}>
-                    About
-                  </Link>
-                )}
-              </li>
-              <li>
-                {location.pathname === '/' ? (
-                  <ScrollLink to="contact" smooth={true} duration={800} className="nav-item" onClick={() => setIsMenuOpen(false)}>
-                    Contact
-                  </ScrollLink>
-                ) : (
-                  <Link to="/contact-us" className="nav-item" onClick={() => setIsMenuOpen(false)}>
-                    Contact
-                  </Link>
-                )}
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
+      <MobileMenu panelRef={panelRef} />
     </header>
   );
 };
