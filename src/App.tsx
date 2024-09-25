@@ -30,10 +30,6 @@ const App: React.FC = () => {
   const [showWelcome, setShowWelcome] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
   useEffect(() => {
     const welcomeShown = sessionStorage.getItem('welcomeShown');
     if (!welcomeShown) {
@@ -47,6 +43,19 @@ const App: React.FC = () => {
     }
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  // **Scroll lock functionality**
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMenuOpen]);
+
   return (
     <ErrorBoundary>
       <Router>
@@ -58,24 +67,30 @@ const App: React.FC = () => {
             <div className="relative">
               <Header handleToggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
               <MobileMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-              <main className={`transition-transform duration-300 ${isMenuOpen ? 'transform -translate-x-64' : ''}`}>
-                <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <>
-                        <HeroSection />
-                        <AboutSection />
-                        <ServicesSection />
-                        <TestimonialsSection />
-                        <ContactSection />
-                      </>
-                    }
-                  />
-                  <Route path="/*" element={<ServiceRoutes />} />
-                </Routes>
+              <div
+                className={`transition-transform duration-300 ${
+                  isMenuOpen ? 'transform -translate-x-64' : ''
+                }`}
+              >
+                <main>
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={
+                        <>
+                          <HeroSection />
+                          <AboutSection />
+                          <ServicesSection />
+                          <TestimonialsSection />
+                          <ContactSection />
+                        </>
+                      }
+                    />
+                    <Route path="/*" element={<ServiceRoutes />} />
+                  </Routes>
+                </main>
                 <Footer />
-              </main>
+              </div>
             </div>
           )}
         </AnimatePresence>
