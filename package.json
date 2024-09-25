@@ -10,7 +10,6 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build"
-
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
@@ -36,14 +35,17 @@
     "react-router-dom": "^6.25.1",
     "react-scroll": "^1.9.0",
     "react-scroll-parallax": "^3.4.5",
+    "react-spring": "^9.7.4",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
+    "@types/react-burger-menu": "^2.8.7",
     "@types/react-dom": "^18.3.0",
     "@types/react-scroll": "^1.8.10",
+    "@types/slideout": "^0.1.23",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
     "@vitejs/plugin-react": "^4.3.1",

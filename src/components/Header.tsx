@@ -1,63 +1,35 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from 'react';
-import { Link as ScrollLink } from 'react-scroll';
-import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import "../App.css";
-import ServicesHoverAccordion from './ui/ServiceHoverAccordion';
-import MobileMenu from './ui/MobileMenu';
-
-const logoVariants = {
-  hidden: {
-    opacity: 0,
-    pathLength: 0,
-    fill: "rgba(255, 255, 255, 0)"
-  },
-  visible: {
-    opacity: 1,
-    pathLength: 1,
-    fill: "rgba(255, 255, 255, 1)"
-  }
-};
+import React, { useState, useEffect } from 'react'
+import { Link as ScrollLink } from 'react-scroll'
+import { Link, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { HiOutlineMenuAlt3 } from 'react-icons/hi'
+import ServicesHoverAccordion from './ui/ServiceHoverAccordion'
 
 interface HeaderProps {
-  panelRef: MutableRefObject<HTMLDivElement | null>;  // Define the type for panelRef
+  handleToggleMenu: () => void
+  isMenuOpen: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({ panelRef }) => {
-  const [isScrolled, setIsScrolled] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const scrollThreshold = 200;
-  const location = useLocation();
-  const [shouldAnimate, setShouldAnimate] = useState(true);
-  const menuRef = useRef<HTMLDivElement>(null);
+const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
+  const [isScrolled, setIsScrolled] = useState(true)
+  const scrollThreshold = 200
+  const location = useLocation()
 
   useEffect(() => {
-    let prevScrollPos = window.scrollY;
+    let prevScrollPos = window.scrollY
 
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      setIsScrolled(currentScrollPos < scrollThreshold || currentScrollPos <= prevScrollPos);
-      prevScrollPos = currentScrollPos;
-    };
+      const currentScrollPos = window.scrollY
+      setIsScrolled(currentScrollPos < scrollThreshold || currentScrollPos <= prevScrollPos)
+      prevScrollPos = currentScrollPos
+    }
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('scroll', handleScroll)
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    setShouldAnimate(true);
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <header
@@ -72,14 +44,9 @@ const Header: React.FC<HeaderProps> = ({ panelRef }) => {
               src="/assets/Brand-images/ram_logo_desktop.png"
               alt="SMMA Logo"
               className="logo_brand"
-              initial={shouldAnimate ? "hidden" : false}
-              animate={shouldAnimate ? "visible" : false}
-              variants={logoVariants}
-              transition={{
-                default: { duration: 2, ease: "easeInOut" },
-                fill: { duration: 2, ease: [1, 0, 0.8, 1] }
-              }}
-              onAnimationComplete={() => setShouldAnimate(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
             />
           </ScrollLink>
         ) : (
@@ -134,10 +101,16 @@ const Header: React.FC<HeaderProps> = ({ panelRef }) => {
         </ul>
       </nav>
 
-      {/* Mobile Menu */}
-      <MobileMenu panelRef={panelRef} />
+      {/* Mobile Menu Button */}
+      {!isMenuOpen && (
+        <div className="lg:hidden">
+          <button onClick={handleToggleMenu} className="text-3xl text-white">
+            <HiOutlineMenuAlt3 />
+          </button>
+        </div>
+      )}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
