@@ -94,7 +94,7 @@ const SatelliteMotion: React.FC = () => {
       ref={satelliteRef}
       src={satellite}
       alt="satellite"
-      className="absolute z-20 h-72"
+      className="absolute z-20 h-52"
       style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
     />
   );
