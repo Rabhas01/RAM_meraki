@@ -1,36 +1,117 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const Footer: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [dynamicWord, setDynamicWord] = useState("Websites");
+
+  // Array of words to rotate dynamically
+  const dynamicWords = [
+    "SEO",
+    "Strategy",
+    "Landing Pages",
+    "Brand Kits",
+    "User Experience",
+    "Websites"
+  ];
+
+  // Function to rotate words every few seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDynamicWord((prevWord) => {
+        const currentIndex = dynamicWords.indexOf(prevWord);
+        const nextIndex = (currentIndex + 1) % dynamicWords.length;
+        return dynamicWords[nextIndex];
+      });
+    }, 3000); // Change word every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.playbackRate = 0.5; // Slow down the video playback
+    }
+  }, []);
+
   return (
-    <footer className="bg-gray-800 text-white py-6">
-      <div className="container mx-auto px-4">
-        <nav className="mb-4">
-          <ul className="flex justify-center space-x-4">
-            <li>
-              <ScrollLink to="home" smooth={true} duration={800} className="hover:underline cursor-pointer">
+    <footer className="relative bg-gray-800 text-white py-24 overflow-hidden">
+      {/* Background Video */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ objectPosition: 'center bottom' }}
+      >
+        <source src="public/assets/background-images/footer_edit_vid.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+
+      {/* Footer Content */}
+      <div className="relative z-20 container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Social Media Links */}
+          <div className="text-center md:text-left">
+            <h4 className="font-bold text-lg mb-2">Follow Us</h4>
+            <div className="flex justify-center md:justify-start space-x-4">
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <FaFacebookF className="text-xl hover:text-blue-500" />
+              </a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <FaInstagram className="text-xl hover:text-pink-500" />
+              </a>
+              <FontAwesomeIcon icon={faXTwitter} className="text-xl hover:text-blue-500" />
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <FaLinkedinIn className="text-xl hover:text-blue-700" />
+              </a>
+            </div>
+          </div>
+
+          {/* Dynamic SEO-friendly Text */}
+          <div className="text-center">
+            <h4 className="font-bold text-lg mb-2">Let's Collaborate</h4>
+            <p className="text-sm md:text-base">
+              We’d love to work with you to design <span className="font-bold">{dynamicWord}</span>, providing a great user experience that's SEO-friendly.
+            </p>
+          </div>
+
+          {/* Phone Number & Useful Links */}
+          <div className="text-center md:text-right">
+            <h4 className="font-bold text-lg mb-2">Give Us a Call</h4>
+            <p>Phone: +1 (555) 555-5555</p>
+            <div className="mt-4">
+              <ScrollLink to="home" smooth={true} duration={800} className="text-sm hover:underline cursor-pointer">
                 Home
               </ScrollLink>
-            </li>
-            <li>
-              <ScrollLink to="services" smooth={true} duration={800} className="hover:underline cursor-pointer">
+              {' | '}
+              <ScrollLink to="services" smooth={true} duration={800} className="text-sm hover:underline cursor-pointer">
                 Services
               </ScrollLink>
-            </li>
-            <li>
-              <ScrollLink to="about" smooth={true} duration={800} className="hover:underline cursor-pointer">
+              {' | '}
+              <ScrollLink to="about" smooth={true} duration={800} className="text-sm hover:underline cursor-pointer">
                 About
               </ScrollLink>
-            </li>
-            <li>
-              <ScrollLink to="contact" smooth={true} duration={800} className="hover:underline cursor-pointer">
+              {' | '}
+              <ScrollLink to="contact" smooth={true} duration={800} className="text-sm hover:underline cursor-pointer">
                 Contact
               </ScrollLink>
-            </li>
-          </ul>
-        </nav>
-        <div className="text-center">
-          <p>&copy; 2024 SMMA. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="text-center mt-8">
+          <p>&copy; 2024 YourCompany. All rights reserved.</p>
         </div>
       </div>
     </footer>
