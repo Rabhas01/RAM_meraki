@@ -54,6 +54,10 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      // Adding custom gradient
+      backgroundImage: {
+        'custom-bg-gradient': 'linear-gradient(356deg, rgba(2,0,36,1) 0%, rgba(3,19,31,1) 51%, rgba(255,255,255,1) 100%);',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
