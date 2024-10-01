@@ -3,22 +3,20 @@ import { useEffect } from "react";
 
 function MapComponent() {
   const position = { lat: 45.43795618983045, lng: -73.70586453869741 };
+  const zoom = 19; // Separate zoom from position
   const mapId = import.meta.env.VITE_GOOGLE_MAPS_ID;
   const map = useMap();
 
   useEffect(() => {
     if (map) {
-      // You can interact with the map object here if needed
       console.log("Map is loaded", map);
-
       return () => {
-        // No need for map.setMap(null), just clean up other resources if necessary
         console.log("Cleanup on unmount");
       };
     }
   }, [map]);
 
-  return <Map zoom={9} center={position} mapId={mapId} />;
+  return <Map zoom={zoom} center={position} mapId={mapId} />;
 }
 
 export default function Intro() {
@@ -31,7 +29,7 @@ export default function Intro() {
 
   return (
     <APIProvider apiKey={apiKey}>
-      <div style={{ height: "100vh", width: "100%" }}>
+      <div style={{ height: "50vh", width: "100%" }}>
         <MapComponent />
       </div>
     </APIProvider>
