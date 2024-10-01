@@ -21,7 +21,7 @@ const ContactPage: React.FC = () => {
 
 
   return (
-    <div className="py-16 bg-gray-800 text-white">
+    <div className="py-16 custom-bg-gradient text-white">
       <div className="w-full h-screen relative">
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <video
