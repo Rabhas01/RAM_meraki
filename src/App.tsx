@@ -85,7 +85,7 @@ const App: React.FC = () => {
                             {/* About us section content */}
                           </ParallaxSection>
                           <ServicesSection />
-                          <ParallaxSection backgroundImage="/assets/background-images/services_parallax_img.jpg">
+                          <ParallaxSection backgroundImage="public/assets/background-images/services_parallax_img.jpg">
                             {/* Service section content */}
                           </ParallaxSection>
                           <TestimonialsSection />
