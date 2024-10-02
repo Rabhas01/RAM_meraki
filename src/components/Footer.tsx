@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,30 +6,6 @@ import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const Footer: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [dynamicWord, setDynamicWord] = useState("Websites");
-
-  // Array of words to rotate dynamically
-  const dynamicWords = [
-    "SEO",
-    "Strategy",
-    "Landing Pages",
-    "Brand Kits",
-    "User Experience",
-    "Websites"
-  ];
-
-  // Function to rotate words every few seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDynamicWord((prevWord) => {
-        const currentIndex = dynamicWords.indexOf(prevWord);
-        const nextIndex = (currentIndex + 1) % dynamicWords.length;
-        return dynamicWords[nextIndex];
-      });
-    }, 3000); // Change word every 3 seconds
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -50,7 +26,7 @@ const Footer: React.FC = () => {
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ objectPosition: 'center bottom' }}
       >
-        <source src="public/assets/background-images/footer_edit_vid.mp4" type="video/mp4" />
+        <source src="/assets/background-images/footer_edit_vid.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -77,11 +53,11 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Dynamic SEO-friendly Text */}
+          {/* Contact Information */}
           <div className="text-center">
-            <h4 className="font-bold text-lg mb-2">Let's Collaborate</h4>
+            <h4 className="font-bold text-lg mb-2">Contact Us</h4>
             <p className="text-sm md:text-base">
-              We’d love to work with you to design <span className="font-bold">{dynamicWord}</span>, providing a great user experience that's SEO-friendly.
+              We're here to help with all your digital marketing needs.
             </p>
           </div>
 
