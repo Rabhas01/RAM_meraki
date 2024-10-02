@@ -90,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
           <li>
             {location.pathname === '/' ? (
               <ScrollLink to="contact" smooth={true} duration={800} className="nav-item">
-                Contact
+                Become a client
               </ScrollLink>
             ) : (
               <Link to="/contact-us" className="nav-item">
