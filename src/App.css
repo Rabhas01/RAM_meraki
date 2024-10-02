@@ -69,10 +69,6 @@
   color: #888;
 }
 
-.text-3xl {
-  color: black;
-}
-
 
 .nav-item {
   @apply relative hover:text-custom-blue transition duration-300 before:absolute before:bottom-0 before:top-10 before:left-0 before:w-full before:h-0.5 before:bg-custom-blue-light before:scale-x-0 hover:before:scale-x-100 before:transition-transform before:duration-1000 before:origin-left cursor-pointer;
