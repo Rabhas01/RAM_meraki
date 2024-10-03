@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                 <FaInstagram className="text-xl hover:text-pink-500" />
               </a>
               <FontAwesomeIcon icon={faXTwitter} className="text-xl hover:text-blue-500" />
-              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/rammeraki" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <FaLinkedinIn className="text-xl hover:text-blue-700" />
               </a>
             </div>
