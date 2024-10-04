@@ -95,20 +95,14 @@ export default function HeroSection() {
       },
     });
 
-    // Move text, sky, and mountains with the scroll
-    timeline
-      .to(text, { yPercent: -100, ease: 'none' }, 0)
-      .to(sky, { yPercent: -30, ease: 'none' }, 0.5)
-      .to(mountains, { yPercent: -15, ease: 'none' }, 0.5)
-      .to(
-        content,
-        {
-          opacity: 0,
-          ease: 'power2.out',
-          duration: 0.3, // Faster fade-out
-        },
-        0.6
-      ); // Adjust timing for smoother transition
+    // Move text up
+    timeline.to(text, { yPercent: -100, ease: 'none' }, 0);
+
+    // After text is gone, move sky and mountains up
+    timeline.to([sky, mountains], {
+      yPercent: -100,
+      ease: 'none',
+    }, '>');
 
     return () => {
       timeline.kill();
