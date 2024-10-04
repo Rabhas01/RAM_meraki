@@ -17,7 +17,7 @@ const ServicesSection: React.FC = () => {
 
         {/* Use the DynamicVideo component */}
         <DynamicVideo
-          videoSrc="/assets/video/8474608-hd_1920_1080_30fps.mp4"
+          videoSrc="src/assets/video/8474608-hd_1920_1080_30fps.mp4"
           initialWidth={1}     // Starting from 1% width
           maxWidth={95}        // Expanding to 95% width
           initialHeight={20}   // Starting from 20vh height
@@ -41,25 +41,25 @@ const ServicesSection: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 uppercase font-mono mt-8">
       <Card 
-        imageSrc="/assets/Brand-images/cropped-website design.png"
+        imageSrc="src/assets/Brand-images/cropped-website design.png"
         title="Website building"
         link="/website-development"
       />
 
       <Card 
-        imageSrc="/assets/Brand-images/website design.png"
+        imageSrc="src/assets/Brand-images/website design.png"
         title="Social Media Management"
         link="/social-media-management"
       />
 
       <Card 
-        imageSrc="image/assets/Brand-images/pexels-brunoscramgnon-11361901.jpg"
+        imageSrc="imagesrc/assets/Brand-images/pexels-brunoscramgnon-11361901.jpg"
         title="Website Design"
         link="/website-design"
       />
 
       <Card 
-       imageSrc="/assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg"
+       imageSrc="src/assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg"
         title="SEO Optimization"
         link="/seo-optimization"
       />

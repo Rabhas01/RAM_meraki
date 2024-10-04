@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ objectPosition: 'center bottom' }}
       >
-        <source src="/assets/background-images/footer_edit_vid.mp4" type="video/mp4" />
+        <source src="src/assets/background-images/footer_edit_vid.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

@@ -4,7 +4,7 @@ import React from 'react';
 const UfoWithBeam: React.FC = () => (
   <div className="relative">
     <img
-      src="/assets/Parallax_images/ufo.png"
+      src="src/assets/Parallax_images/ufo.png"
       alt="UFO"
       className="ufo"
     />

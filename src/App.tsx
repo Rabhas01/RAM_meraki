@@ -82,10 +82,10 @@ const App: React.FC = () => {
                         <>
                           <HeroSection />
                           <AboutSection />
-                          <ParallaxSection backgroundImage="/assets/background-images/about-us_parallax_img.jpg">
+                          <ParallaxSection backgroundImage="src/assets/background-images/about-us_parallax_img.jpg">
                           </ParallaxSection>
                           <ServicesSection />
-                          <ParallaxSection backgroundImage="/assets/background-images/services_parallax_img.jpg">
+                          <ParallaxSection backgroundImage="src/assets/background-images/services_parallax_img.jpg">
                           </ParallaxSection>
                           <TestimonialsSection />
                           <ContactSection />

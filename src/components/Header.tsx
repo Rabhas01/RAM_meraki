@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
         {location.pathname === '/' ? (
           <ScrollLink to="home" smooth={true} duration={800} className="hover:text-gray-400 cursor-pointer">
             <motion.img
-              src="/assets/Brand-images/ram_logo_desktop.png"
+              src="src/assets/Brand-images/ram_logo_desktop.png"
               alt="SMMA Logo"
               className="logo_brand"
               initial={{ opacity: 0 }}
@@ -52,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
         ) : (
           <Link to="/" className="hover:text-gray-400 cursor-pointer">
             <img
-              src="/assets/Brand-images/ram_logo_desktop.png"
+              src="src/assets/Brand-images/ram_logo_desktop.png"
               alt="SMMA Logo"
               className="logo_brand"
             />

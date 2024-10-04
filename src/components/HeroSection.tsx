@@ -116,7 +116,7 @@ export default function HeroSection() {
         <video
           ref={skyRef}
           className="absolute inset-0 w-full h-full object-cover"
-          src="/assets/Parallax_images/test.mp4"
+          src="src/assets/Parallax_images/test.mp4"
           autoPlay
           muted
           loop
@@ -127,14 +127,14 @@ export default function HeroSection() {
         <img
           ref={mountainsRef}
           className="absolute inset-0 w-full h-full object-cover"
-          src="/assets/Parallax_images/mountains_dark.png"
+          src="src/assets/Parallax_images/mountains_dark.png"
           alt="Mountains"
         />
 
         {/* Hero Section Text */}
         <div ref={textRef} className="relative z-10 flex flex-col items-start justify-center h-full text-left text-white pl-20 md:pl-24 pb-8 md:pb-12 md:pt-24">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Elevate Your Brand</h1>
-          <p className="text-3xl md:text-3xl mb-6">
+          <h1 className="text-4xl md:text-7xl font-bold mb-4">Elevate Your Brand</h1>
+          <p className="text-3xl md:text-5xl mb-6">
             We help you <span className="dynamic-word font-bold">{dynamicWord}</span>
             {showCaret && <span className="caret">|</span>} {/* Caret */}
           </p>
