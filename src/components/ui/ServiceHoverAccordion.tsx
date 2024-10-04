@@ -11,10 +11,10 @@ const ServicesHoverMenu: React.FC = () => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const services: ServiceItem[] = [
-    { title: 'Web Development', link: '/services/1' },
-    { title: 'SEO Optimization', link: '/services/2' },
-    { title: 'Social Media Management', link: '/services/3' },
-    { title: 'Service 4', link: '/services/4' },
+    { title: 'Website Development', link: '/website-development' },
+    { title: 'SEO Optimization', link: '/seo-optimization' },
+    { title: 'Social Media Management', link: '/social-media-management' },
+    { title: 'Website Design', link: '/website-design' },
   ];
 
   const handleMouseEnter = () => {

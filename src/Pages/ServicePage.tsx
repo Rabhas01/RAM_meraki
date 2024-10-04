@@ -43,7 +43,7 @@ const ServicesSection: React.FC = () => {
       <Card 
         imageSrc="/assets/Brand-images/cropped-website design.png"
         title="Website building"
-        link="/website-design-and-development"
+        link="/website-development"
       />
 
       <Card 
@@ -54,20 +54,14 @@ const ServicesSection: React.FC = () => {
 
       <Card 
         imageSrc="image/assets/Brand-images/pexels-brunoscramgnon-11361901.jpg"
-        title="Advertising"
-        link="/content-creation"
-      />
-
-      <Card 
-        imageSrc="/assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg"
-        title="Design Services"
-        link="/learn-more-4"
+        title="Website Design"
+        link="/website-design"
       />
 
       <Card 
        imageSrc="/assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg"
-        title="SEO optimization"
-        link="/seo"
+        title="SEO Optimization"
+        link="/seo-optimization"
       />
       </div>
 
