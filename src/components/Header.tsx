@@ -1,35 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import { Link as ScrollLink } from 'react-scroll'
-import { Link, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { HiOutlineMenuAlt3 } from 'react-icons/hi'
-import ServicesHoverAccordion from './ui/ServiceHoverAccordion'
+import React, { useState, useEffect } from 'react';
+import { Link as ScrollLink } from 'react-scroll';
+import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { HiOutlineMenuAlt3 } from 'react-icons/hi';
+import ServicesHoverAccordion from './ui/ServiceHoverAccordion';
+import { ContactModal } from './contact-modal'; // Import the ContactModal component
 
 interface HeaderProps {
-  handleToggleMenu: () => void
-  isMenuOpen: boolean
+  handleToggleMenu: () => void;
+  isMenuOpen: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
-  const [isScrolled, setIsScrolled] = useState(true)
-  const scrollThreshold = 200
-  const location = useLocation()
+  const [isScrolled, setIsScrolled] = useState(true);
+  const scrollThreshold = 200;
+  const location = useLocation();
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   useEffect(() => {
-    let prevScrollPos = window.scrollY
+    let prevScrollPos = window.scrollY;
 
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY
-      setIsScrolled(currentScrollPos < scrollThreshold || currentScrollPos <= prevScrollPos)
-      prevScrollPos = currentScrollPos
-    }
+      const currentScrollPos = window.scrollY;
+      setIsScrolled(currentScrollPos < scrollThreshold || currentScrollPos <= prevScrollPos);
+      prevScrollPos = currentScrollPos;
+    };
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleOpenContactModal = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault(); // Prevent link navigation or scroll behavior
+    setIsContactModalOpen(true); // Open the modal
+  };
 
   return (
     <header
@@ -88,15 +95,10 @@ const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
             )}
           </li>
           <li>
-            {location.pathname === '/' ? (
-              <ScrollLink to="contact" smooth={true} duration={800} className="nav-item">
-                Become a client
-              </ScrollLink>
-            ) : (
-              <Link to="/contact-us" className="nav-item">
-                Contact
-              </Link>
-            )}
+            {/* Modify the button to open the modal */}
+            <a href="#" className="nav-item" onClick={handleOpenContactModal}>
+              Become a client
+            </a>
           </li>
         </ul>
       </nav>
@@ -109,8 +111,14 @@ const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
           </button>
         </div>
       )}
-    </header>
-  )
-}
 
-export default Header
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onOpenChange={setIsContactModalOpen}
+      />
+    </header>
+  );
+};
+
+export default Header;
