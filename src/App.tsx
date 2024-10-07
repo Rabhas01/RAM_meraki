@@ -6,7 +6,6 @@ import Header from '@/components/Header';
 import Footer from './components/Footer';
 import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServiceSection';
-import ContactSection from './components/ContactSection';
 import AboutSection from './components/AboutSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import Index from './components/Preloader/index';
@@ -88,7 +87,6 @@ const App: React.FC = () => {
                           <ParallaxSection backgroundImage="src/assets/background-images/services_parallax_img.jpg">
                           </ParallaxSection>
                           <TestimonialsSection />
-                          <ContactSection />
                           <PhoneIcon />
                         </>
                       }
@@ -96,7 +94,7 @@ const App: React.FC = () => {
                     <Route path="/*" element={<ServiceRoutes />} />
                   </Routes>
                 </main>
-                <Footer />
+                 <Footer />
               </div>
             </div>
           )}
