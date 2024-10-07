@@ -39,30 +39,38 @@ const ServicesSection: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 uppercase font-mono mt-8">
-      <Card 
-        imageSrc="src/assets/Brand-images/cropped-website design.png"
-        title="Website building"
-        link="/website-development"
-      />
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 uppercase font-mono mt-8 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-lg">
+        <Card 
+          imageSrc="src/assets/Brand-images/web-devlopment-card.jpg"
+          title="Website building"
+          link="/website-development"
+          cardClassName="rounded-lg relative overflow-hidden group"
+          imageClassName="transition-transform duration-300 group-hover:scale-110"
+        />
 
-      <Card 
-        imageSrc="src/assets/Brand-images/website design.png"
-        title="Social Media Management"
-        link="/social-media-management"
-      />
+        <Card 
+          imageSrc="src/assets/Brand-images/social-media-card.jpg"
+          title="Social Media Management"
+          link="/social-media-management"
+          cardClassName="rounded-lg relative overflow-hidden group"
+          imageClassName="transition-transform duration-300 group-hover:scale-110"
+        />
 
-      <Card 
-        imageSrc="imagesrc/assets/Brand-images/pexels-brunoscramgnon-11361901.jpg"
-        title="Website Design"
-        link="/website-design"
-      />
+        <Card 
+          imageSrc="src/assets/Brand-images/web-design-card.jpg"
+          title="Website Design"
+          link="/website-design"
+          cardClassName="rounded-lg relative overflow-hidden group"
+          imageClassName="transition-transform duration-300 group-hover:scale-110"
+        />
 
-      <Card 
-       imageSrc="src/assets/Brand-images/pexels-alexander-mass-748453803-25489323.jpg"
-        title="SEO Optimization"
-        link="/seo-optimization"
-      />
+        <Card 
+          imageSrc="src/assets/Brand-images/seo-card.jpg"
+          title="SEO Optimization"
+          link="/seo-optimization"
+          cardClassName="rounded-lg relative overflow-hidden group"
+          imageClassName="transition-transform duration-300 group-hover:scale-110"
+        />
       </div>
 
       <TestimonialCarousel />
