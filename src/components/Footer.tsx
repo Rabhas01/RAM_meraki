@@ -1,97 +1,101 @@
-import React, { useEffect, useRef } from 'react';
-import { Link as ScrollLink } from 'react-scroll';
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { Mail, Phone, MapPin, Linkedin } from 'lucide-react';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Map from './Map'; // Assuming you have a Map component
+import { ContactModal } from './contact-modal'; // Import the contact-modal component
 
-const Footer: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+export default function Footer() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.playbackRate = 0.5; // Slow down the video playback
-    }
-  }, []);
+  const handleOpenContactModal = () => {
+    setIsContactModalOpen(true); // Open the modal
+  };
 
   return (
-    <footer className="relative bg-gray-800 text-white py-24 overflow-hidden">
-      {/* Background Video */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        preload="auto"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ objectPosition: 'center bottom' }}
-      >
-        <source src="src/assets/background-images/footer_edit_vid.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
-
-      {/* Footer Content */}
-      <div className="relative z-20 container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Social Media Links */}
-          <div className="text-center md:text-left">
-            <h4 className="font-bold text-lg mb-2">Follow Us</h4>
-            <div className="flex justify-center md:justify-start space-x-4">
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <FaFacebookF className="text-xl hover:text-blue-500" />
-              </a>
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <FaInstagram className="text-xl hover:text-pink-500" />
-              </a>
-              <FontAwesomeIcon icon={faXTwitter} className="text-xl hover:text-blue-500" />
-              <a href="https://www.linkedin.com/company/rammeraki" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <FaLinkedinIn className="text-xl hover:text-blue-700" />
-              </a>
-            </div>
-          </div>
-
-          {/* Contact Information */}
-          <div className="text-center">
-            <h4 className="font-bold text-lg mb-2">Contact Us</h4>
-            <p className="text-sm md:text-base">
-              We're here to help with all your digital marketing needs.
+    <footer className="bg-gradient-to-t from-gray-900 via-teal-900 to-gray-900 text-gray-200">
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold text-teal-400">Explore the Cosmos</h3>
+            <p className="text-gray-300">
+              Join us on a journey through the digital universe. We're here to help you navigate the vast expanse of online possibilities.
             </p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">
+                <FaFacebookF className="h-6 w-6" />
+                <span className="sr-only">Facebook</span>
+              </a>
+              <a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">
+                <FaInstagram className="h-6 w-6" />
+                <span className="sr-only">Instagram</span>
+              </a>
+              <a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">
+                <FontAwesomeIcon icon={faXTwitter} className="h-6 w-6" />
+                <span className="sr-only">Twitter</span>
+              </a>
+              <a href="#" className="text-gray-300 hover:text-teal-400 transition-colors">
+                <Linkedin className="h-6 w-6" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+            </div>
           </div>
 
-          {/* Phone Number & Useful Links */}
-          <div className="text-center md:text-right">
-            <h4 className="font-bold text-lg mb-2">Give Us a Call</h4>
-            <p>Phone: +1 (555) 555-5555</p>
-            <div className="mt-4">
-              <ScrollLink to="home" smooth={true} duration={800} className="text-sm hover:underline cursor-pointer">
-                Home
-              </ScrollLink>
-              {' | '}
-              <ScrollLink to="services" smooth={true} duration={800} className="text-sm hover:underline cursor-pointer">
-                Services
-              </ScrollLink>
-              {' | '}
-              <ScrollLink to="about" smooth={true} duration={800} className="text-sm hover:underline cursor-pointer">
-                About
-              </ScrollLink>
-              {' | '}
-              <ScrollLink to="contact" smooth={true} duration={800} className="text-sm hover:underline cursor-pointer">
-                Contact
-              </ScrollLink>
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold text-teal-400">Our Galactic Coordinates</h3>
+            <div className="h-64 rounded-lg overflow-hidden">
+              <Map />
             </div>
+            <div className="flex items-center space-x-2 text-gray-300">
+              <MapPin className="h-5 w-5 text-teal-400" />
+              <span>123 Cosmic Avenue, Digital Galaxy, CY 12345</span>
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold text-teal-400">Intergalactic Communication</h3>
+            <p className="text-gray-300">
+              Ready to launch your next project? Our team of cosmic creators is standing by to assist you on your digital odyssey.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2 text-gray-300">
+                <Phone className="h-5 w-5 text-teal-400" />
+                <span>+1 (555) 555-5555</span>
+              </div>
+              <div className="flex items-center space-x-2 text-gray-300">
+                <Mail className="h-5 w-5 text-teal-400" />
+                <span>contact@rammeraki.com</span>
+              </div>
+            </div>
+            <button
+              className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-full transition-colors"
+              onClick={handleOpenContactModal} // Open modal on button click
+            >
+              Launch Communication Portal
+            </button>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-center mt-8">
-          <p>&copy; 2024 YourCompany. All rights reserved.</p>
+        <div className="mt-12 pt-8 border-t border-gray-700">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <nav className="flex flex-wrap justify-center md:justify-start gap-4 mb-4 md:mb-0">
+              <Link href="/" className="text-gray-300 hover:text-teal-400 transition-colors">Home</Link>
+              <Link href="/services" className="text-gray-300 hover:text-teal-400 transition-colors">Services</Link>
+              <Link href="/about" className="text-gray-300 hover:text-teal-400 transition-colors">About</Link>
+              <Link href="/contact" className="text-gray-300 hover:text-teal-400 transition-colors">Contact</Link>
+            </nav>
+            <p className="text-gray-400 text-sm">© 2024 rammeraki. All rights reserved.</p>
+          </div>
         </div>
       </div>
+
+      {/* Communication Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onOpenChange={setIsContactModalOpen} // Modal's open/close state handler
+      />
     </footer>
   );
-};
-
-export default Footer;
+}
