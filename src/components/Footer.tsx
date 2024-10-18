@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Linkedin } from 'lucide-react';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
