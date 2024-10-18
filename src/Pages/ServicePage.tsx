@@ -6,6 +6,11 @@ import CallToAction from '@/components/ServicePage_components/CallToAction';
 import FAQSection from '@/components/ServicePage_components/FAQSection';
 import TextMovement from '@/components/ServicePage_components/TextMovement';
 import DynamicVideo from '@/components/ServicePage_components/DynamicVideo'; // Import the DynamicVideo component
+import video8474608 from '../assets/video/8474608-hd_1920_1080_30fps.mp4';
+import webDevelopmentCard from '../assets/Brand-images/web-devlopment-card.jpg';
+import socialMediaCard from '../assets/Brand-images/social-media-card.jpg';
+import webDesignCard from '../assets/Brand-images/web-design-card.jpg';
+import seoCard from '../assets/Brand-images/seo-card.jpg';
 
 const ServicesSection: React.FC = () => {
   return (
@@ -17,7 +22,7 @@ const ServicesSection: React.FC = () => {
 
         {/* Use the DynamicVideo component */}
         <DynamicVideo
-          videoSrc="src/assets/video/8474608-hd_1920_1080_30fps.mp4"
+          videoSrc={video8474608}
           initialWidth={1}     // Starting from 1% width
           maxWidth={95}        // Expanding to 95% width
           initialHeight={20}   // Starting from 20vh height
@@ -41,7 +46,7 @@ const ServicesSection: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 uppercase font-mono mt-8 bg-opacity-20 backdrop-filter backdrop-blur-sm rounded-lg">
         <Card 
-          imageSrc="src/assets/Brand-images/web-devlopment-card.jpg"
+          imageSrc={webDevelopmentCard}
           title="Website building"
           link="/website-development"
           cardClassName="rounded-lg relative overflow-hidden group"
@@ -49,7 +54,7 @@ const ServicesSection: React.FC = () => {
         />
 
         <Card 
-          imageSrc="src/assets/Brand-images/social-media-card.jpg"
+          imageSrc={socialMediaCard}
           title="Social Media Management"
           link="/social-media-management"
           cardClassName="rounded-lg relative overflow-hidden group"
@@ -57,7 +62,7 @@ const ServicesSection: React.FC = () => {
         />
 
         <Card 
-          imageSrc="src/assets/Brand-images/web-design-card.jpg"
+          imageSrc={webDesignCard}
           title="Website Design"
           link="/website-design"
           cardClassName="rounded-lg relative overflow-hidden group"
@@ -65,7 +70,7 @@ const ServicesSection: React.FC = () => {
         />
 
         <Card 
-          imageSrc="src/assets/Brand-images/seo-card.jpg"
+          imageSrc={seoCard}
           title="SEO Optimization"
           link="/seo-optimization"
           cardClassName="rounded-lg relative overflow-hidden group"

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import ServicesHoverAccordion from './ui/ServiceHoverAccordion';
 import { ContactModal } from './contact-modal'; // Import the ContactModal component
+import ramLogo from '../assets/Brand-images/ram_logo_desktop.png'; 
 
 interface HeaderProps {
   handleToggleMenu: () => void;
@@ -48,8 +49,8 @@ const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
         {location.pathname === '/' ? (
           <ScrollLink to="home" smooth={true} duration={800} className="hover:text-gray-400 cursor-pointer">
             <motion.img
-              src="src/assets/Brand-images/ram_logo_desktop.png"
-              alt="SMMA Logo"
+              src={ramLogo}
+              alt="SMMA Logos"
               className="logo_brand"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -59,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
         ) : (
           <Link to="/" className="hover:text-gray-400 cursor-pointer">
             <img
-              src="src/assets/Brand-images/ram_logo_desktop.png"
+              src={ramLogo}
               alt="SMMA Logo"
               className="logo_brand"
             />

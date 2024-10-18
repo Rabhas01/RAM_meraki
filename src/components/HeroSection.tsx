@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SatelliteMotion from './ufo/SatelliteMotion';
 import { ContactModal } from './contact-modal';
+import skyVideo from '../assets/Parallax_images/sky_vid.mp4';
+import mountainsImage from '../assets/Parallax_images/mountains_dark.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -116,7 +118,7 @@ export default function HeroSection() {
         <video
           ref={skyRef}
           className="absolute inset-0 w-full h-full object-cover"
-          src="src/assets/Parallax_images/test.mp4"
+          src={skyVideo}
           autoPlay
           muted
           loop
@@ -127,7 +129,7 @@ export default function HeroSection() {
         <img
           ref={mountainsRef}
           className="absolute inset-0 w-full h-full object-cover"
-          src="src/assets/Parallax_images/mountains_dark.png"
+          src={mountainsImage}
           alt="Mountains"
         />
 

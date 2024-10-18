@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+import satellite from '@/assets/Parallax_images/Satellite_RAM.png';
 
 gsap.registerPlugin(MotionPathPlugin);
-
-const satellite = "src/assets/Parallax_images/Satellite_RAM.png";
 
 const SatelliteMotion: React.FC = () => {
   const satelliteRef = useRef<HTMLImageElement>(null);

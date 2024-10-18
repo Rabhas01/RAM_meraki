@@ -1,32 +1,37 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import webDevelopmentIcon from '../assets/icons/web-development-icon-for-marketing-website-service (2).svg';
+import marketingIcon from '../assets/icons/marketing-icon.svg';
+import designIcon from '../assets/icons/a-web-designing-illustration-for-a--website-using-.svg';
+import socialMediaIcon from '../assets/icons/social-media-icon-for-marketing-website-service-se (1).svg';
 
 const services = [
   {
-    icon: "src/assets/icons/web-development-icon-for-marketing-website-service (2).svg",
+    icon: webDevelopmentIcon,  // Use imported image
     title: "Website Development",
     description: "We provide design, upgrades, and management for compelling designs that remain effective in the digital realm.",
     link: "/website-design-and-development"
   },
   {
-    icon: "src/assets/icons/marketing-icon.svg",
+    icon: marketingIcon,  // Use imported image
     title: "Marketing",
     description: "To maximise your company's online presence, we provide marketing material production, SEO, market research, ad creation, and implementation.",
     link: "/marketing"
   },
   {
-    icon: "src/assets/icons/a-web-designing-illustration-for-a--website-using-.svg",
+    icon: designIcon,  // Use imported image
     title: "Design Services",
     description: "Our design services include a comprehensive brand kit for a consistent identity, including colours, logos, and image guidelines.",
     link: "/design-services"
   },
   {
-    icon: "src/assets/icons/social-media-icon-for-marketing-website-service-se (1).svg",
+    icon: socialMediaIcon,  // Use imported image
     title: "Social Media Management",
     description: "By continuous, interesting content and strategic audience targeting, our social media management service enhances your online presence.",
     link: "/social-media-management"
   }
 ];
+
 
 const ServicesSection: React.FC = () => {
   return (

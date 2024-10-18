@@ -14,6 +14,9 @@ import ErrorBoundary from './ErrorBoundary';
 import MobileMenu from './components/ui/MobileMenu';
 import ParallaxSection from './components/ui/ParallaxSection';
 import PhoneIcon from './components/ui/PhoneIcon';
+import aboutUsParallaxImg from './assets/background-images/about-us_parallax_img.jpg';
+import servicesParallaxImg from './assets/background-images/services_parallax_img.jpg';
+
 
 const WELCOME_SCREEN_DURATION = 2200; // Time the welcome screen is shown in milliseconds
 
@@ -81,11 +84,9 @@ const App: React.FC = () => {
                         <>
                           <HeroSection />
                           <AboutSection />
-                          <ParallaxSection backgroundImage="src/assets/background-images/about-us_parallax_img.jpg">
-                          </ParallaxSection>
+                          <ParallaxSection backgroundImage={aboutUsParallaxImg} />
                           <ServicesSection />
-                          <ParallaxSection backgroundImage="src/assets/background-images/services_parallax_img.jpg">
-                          </ParallaxSection>
+                          <ParallaxSection backgroundImage={servicesParallaxImg} />
                           <TestimonialsSection />
                           <PhoneIcon />
                         </>
