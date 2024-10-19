@@ -94,17 +94,27 @@ export default function HeroSection() {
         scrub: true,
         pin: content,
         anticipatePin: 1,
+        markers: true,
+        // normalizeScroll: true,
       },
     });
 
     // Move text up
-    timeline.to(text, { yPercent: -100, ease: 'none' }, 0);
+    timeline.to(text, { yPercent: -100, ease: 'none', 
+      onComplete: () => console.log('Text animation completed')
+    }, 0);
+    
 
     // After text is gone, move sky and mountains up
     timeline.to([sky, mountains], {
       yPercent: -100,
       ease: 'none',
+      // DEBUG: Add onComplete callback to log when background animation is done
+      onComplete: () => console.log('Background animation completed')
     }, '>');
+
+    // DEBUG: Log timeline duration
+    console.log('Timeline duration:', timeline.duration());
 
     return () => {
       timeline.kill();
