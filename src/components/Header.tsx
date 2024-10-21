@@ -85,15 +85,9 @@ const Header: React.FC<HeaderProps> = ({ handleToggleMenu, isMenuOpen }) => {
             <ServicesHoverAccordion />
           </li>
           <li>
-            {location.pathname === '/' ? (
-              <ScrollLink to="about" smooth={true} duration={800} className="nav-item">
-                About
-              </ScrollLink>
-            ) : (
-              <Link to="/#about" className="nav-item">
+              <Link to="/about" className="nav-item">
                 About
               </Link>
-            )}
           </li>
           <li>
             {/* Modify the button to open the modal */}
