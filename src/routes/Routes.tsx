@@ -15,7 +15,7 @@ const ServiceRoutes: React.FC = () => {
       <Route path="/website-design" element={<DesignService />} />
       <Route path="/seo-optimization" element={<SEO />} />
       <Route path="/services" element={<ServicePage />} />
-      <Route path="/about-us" element={<AboutUsPage />} />
+      <Route path="/about" element={<AboutUsPage />} />
     </Routes>
   );
 };

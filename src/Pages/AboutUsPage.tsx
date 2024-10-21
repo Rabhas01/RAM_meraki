@@ -63,7 +63,7 @@ const AboutUsPage: React.FC = () => {
                   className="w-24 h-24 rounded-full"
                 />
                 <div>
-                  <p className="text-gray-200 font-semibold">Jane Doe</p>
+                  <p className="text-gray-200 font-semibold">Rabhas Vashisht</p>
                   <p className="text-gray-400">Visionary leader with 15+ years of experience in digital marketing</p>
                 </div>
               </div>
