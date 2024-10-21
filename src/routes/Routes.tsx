@@ -5,6 +5,7 @@ import SEO from '../Pages/SEO';
 import WebDevelopment from '../Pages/WebDevelopment';
 import DesignService from '../Pages/DesignService';
 import ServicePage from '@/Pages/ServicePage';
+import AboutUsPage from '@/Pages/AboutUsPage';
 
 const ServiceRoutes: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const ServiceRoutes: React.FC = () => {
       <Route path="/website-design" element={<DesignService />} />
       <Route path="/seo-optimization" element={<SEO />} />
       <Route path="/services" element={<ServicePage />} />
+      <Route path="/about-us" element={<AboutUsPage />} />
     </Routes>
   );
 };
