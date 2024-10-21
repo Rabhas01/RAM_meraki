@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom'; // Import the Link component from React Router
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,6 +74,13 @@ export default function AboutSection() {
               Rising Above Marketing (RAM) is a digital marketing agency based in Montreal, specializing in delivering innovative solutions in social media management, web design, and digital development.
               Our mission is to empower businesses by providing cutting-edge services that drive growth and position you above the competition in the digital landscape.
             </p>
+
+            {/* Add Learn More Button here */}
+            <Link to="/about-us">
+              <button className="mt-4 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded transition-colors">
+                Learn More
+              </button>
+            </Link>
           </div>
 
           {/* Accordion Section */}
