@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SatelliteMotion from './ufo/SatelliteMotion';
 import { ContactModal } from './contact-modal';
+import DynamicText from './ui/DynamicText_hero';
 import skyVideo from '../assets/Parallax_images/sky_vid.mp4';
 import mountainsImage from '../assets/Parallax_images/mountains_dark.png';
 
@@ -15,67 +16,9 @@ export default function HeroSection() {
   const skyRef = useRef<HTMLVideoElement>(null);
   const mountainsRef = useRef<HTMLImageElement>(null);
 
-  const [dynamicWord, setDynamicWord] = useState("");
-  const [showCaret, setShowCaret] = useState(true); // Controls blinking caret
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
-  const dynamicWords = [
-    "Grow",
-    "Convert",
-    "Engage",
-    "Transform",
-    "Thrive"
-  ];
-
-  const typingSpeed = 150;  // Speed of typing in milliseconds
-  const deletingSpeed = 100; // Speed of deleting in milliseconds
-  const delayBetweenWords = 1000; // Pause time between words in milliseconds
-
-  useEffect(() => {
-    let wordIndex = 0;
-    let letterIndex = 0;
-    let isDeleting = false;
-
-    const handleTyping = () => {
-      const currentWord = dynamicWords[wordIndex];
-
-      if (!isDeleting) {
-        // Typing in
-        if (letterIndex < currentWord.length) {
-          setDynamicWord(currentWord.substring(0, letterIndex + 1)); // Append the next letter
-          letterIndex++;
-        } else {
-          // Pause after typing full word
-          setTimeout(() => {
-            isDeleting = true;
-          }, delayBetweenWords);
-        }
-      } else {
-        // Deleting
-        if (letterIndex > 0) {
-          setDynamicWord(currentWord.substring(0, letterIndex - 1)); // Remove the last letter
-          letterIndex--;
-        } else {
-          // Move to the next word
-          isDeleting = false;
-          wordIndex = (wordIndex + 1) % dynamicWords.length;
-        }
-      }
-    };
-
-    const typingInterval = setInterval(handleTyping, isDeleting ? deletingSpeed : typingSpeed);
-
-    return () => clearInterval(typingInterval);
-  }, []);
-
-  // Control the blinking caret
-  useEffect(() => {
-    const caretInterval = setInterval(() => {
-      setShowCaret((prev) => !prev); // Toggle caret visibility
-    }, 500); // Blink every 500ms
-
-    return () => clearInterval(caretInterval);
-  }, []);
+  const dynamicWords = ["Grow", "Convert", "Engage", "Transform", "Thrive"];
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -94,37 +37,26 @@ export default function HeroSection() {
         scrub: true,
         pin: content,
         anticipatePin: 1,
-        markers: true,
-        // normalizeScroll: true,
       },
     });
 
     // Move text up
-    timeline.to(text, { yPercent: -100, ease: 'none', 
-      onComplete: () => console.log('Text animation completed')
-    }, 0);
-    
+    timeline.to(text, { yPercent: -100, ease: 'none', duration: 0.5 });
 
-    // After text is gone, move sky and mountains up
-    timeline.to([sky, mountains], {
-      yPercent: -100,
-      ease: 'none',
-      // DEBUG: Add onComplete callback to log when background animation is done
-      onComplete: () => console.log('Background animation completed')
-    }, '>');
+    // Add a pause
+    timeline.to({}, { duration: 0.3 });
 
-    // DEBUG: Log timeline duration
-    console.log('Timeline duration:', timeline.duration());
+    // Move background elements
+    timeline.to([sky, mountains], { yPercent: -30, ease: 'none', duration: 0.5 });
 
     return () => {
-      timeline.kill();
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative" id="home">
-      <div ref={contentRef} className="h-screen overflow-hidden">
-        {/* Background Video */}
+    <section ref={sectionRef} className="relative h-[200vh]" id="home">
+      <div ref={contentRef} className="sticky top-0 h-screen overflow-hidden">
         <video
           ref={skyRef}
           className="absolute inset-0 w-full h-full object-cover"
@@ -147,8 +79,13 @@ export default function HeroSection() {
         <div ref={textRef} className="relative z-10 flex flex-col items-start justify-center h-full text-left text-white pl-20 md:pl-24 pb-8 md:pb-12 md:pt-24">
           <h1 className="text-4xl md:text-7xl font-bold mb-4">Elevate Your Brand</h1>
           <p className="text-3xl md:text-5xl mb-6">
-            We help you <span className="dynamic-word font-bold">{dynamicWord}</span>
-            {showCaret && <span className="caret">|</span>} {/* Caret */}
+            We help you{" "}
+            <DynamicText
+              words={dynamicWords}
+              typingSpeed={150}
+              deletingSpeed={100}
+              delayBetweenWords={1000}
+            />
           </p>
           <button
             onClick={() => setIsContactModalOpen(true)}
@@ -157,11 +94,8 @@ export default function HeroSection() {
             Become a client
           </button>
         </div>
-
         <SatelliteMotion />
       </div>
-      
-      {/* Contact Modal */}
       <ContactModal isOpen={isContactModalOpen} onOpenChange={setIsContactModalOpen} />
     </section>
   );
