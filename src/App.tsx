@@ -16,7 +16,10 @@ import ParallaxSection from './components/ui/ParallaxSection';
 import PhoneIcon from './components/ui/PhoneIcon';
 import aboutUsParallaxImg from './assets/background-images/about-us_parallax_img.jpg';
 import servicesParallaxImg from './assets/background-images/services_parallax_img.jpg';
+import Modal from 'react-modal';
 
+// Set the appElement to #root for accessibility
+Modal.setAppElement('#root');
 
 const WELCOME_SCREEN_DURATION = 2200; // Time the welcome screen is shown in milliseconds
 
