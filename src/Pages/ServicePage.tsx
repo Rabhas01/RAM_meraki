@@ -6,7 +6,8 @@ import CallToAction from '@/components/ServicePage_components/CallToAction';
 import FAQSection from '@/components/ServicePage_components/FAQSection';
 import TextMovement from '@/components/ServicePage_components/TextMovement';
 import DynamicVideo from '@/components/ServicePage_components/DynamicVideo'; // Import the DynamicVideo component
-import video8474608 from '../assets/video/8474608-hd_1920_1080_30fps.mp4';
+import videoPreview from '../assets/video/8474608-hd_1920_1080_30fps.mp4'; // Import the preview video
+import videoFull from '../assets/video/Service_page_vid.mp4'; // Import the full video
 import webDevelopmentCard from '../assets/Brand-images/web-devlopment-card.jpg';
 import socialMediaCard from '../assets/Brand-images/social-media-card.jpg';
 import webDesignCard from '../assets/Brand-images/web-design-card.jpg';
@@ -22,11 +23,12 @@ const ServicesSection: React.FC = () => {
 
         {/* Use the DynamicVideo component */}
         <DynamicVideo
-          videoSrc={video8474608}
-          initialWidth={1}     // Starting from 1% width
-          maxWidth={95}        // Expanding to 95% width
-          initialHeight={20}   // Starting from 20vh height
-          maxHeight={100}      // Expanding to 100vh height
+          previewVideoSrc={videoPreview}  // Preview video to be played initially
+          fullVideoSrc={videoFull}        // Full video to be played on click
+          initialWidth={1}                // Starting from 1% width
+          maxWidth={95}                   // Expanding to 95% width
+          initialHeight={20}              // Starting from 20vh height
+          maxHeight={100}                 // Expanding to 100vh height
         />
 
         {/* Content Section */}
