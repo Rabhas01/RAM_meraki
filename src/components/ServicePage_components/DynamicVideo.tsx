@@ -1,53 +1,77 @@
-// Import necessary libraries and types
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faVolumeMute, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import MobileVideoModal from '@/components/ui/MobileVideoModal'; // Import the new MobileVideoModal component
 
-// Register the ScrollTrigger plugin with GSAP
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// Define the props interface for the DynamicVideo component
 interface DynamicVideoProps {
-  videoSrc: string;        // Source URL of the video
-  initialWidth?: number;   // Optional initial width percentage
-  maxWidth?: number;       // Optional maximum width percentage
-  initialHeight?: number;  // Optional initial height in viewport height units
-  maxHeight?: number;      // Optional maximum height in viewport height units
+  previewVideoSrc: string;
+  fullVideoSrc: string;
+  initialWidth?: number;
+  maxWidth?: number;
+  initialHeight?: number;
+  maxHeight?: number;
 }
 
-// Define the DynamicVideo functional component
 const DynamicVideo: React.FC<DynamicVideoProps> = ({
-  videoSrc,
-  initialWidth = 20,   // Default initial width is 20%
-  maxWidth = 95,       // Default maximum width is 95%
-  initialHeight = 30,  // Default initial height is 30vh
-  maxHeight = 100,     // Default maximum height is 100vh
+  previewVideoSrc,
+  fullVideoSrc,
+  initialWidth = 1,
+  maxWidth = 95,
+  initialHeight = 20,
+  maxHeight = 100,
 }) => {
-  // Create a ref to access the video container DOM element
-  const videoRef = useRef<HTMLDivElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const videoElementRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPreview, setIsPreview] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isLazyLoaded, setIsLazyLoaded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
-  // useEffect hook to set up the animations after the component mounts
   useEffect(() => {
-    const videoElement = videoRef.current;
+    const videoElement = videoContainerRef.current;
+
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsLazyLoaded(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { root: null, threshold: 0.5 }
+    );
+
+    if (videoContainerRef.current) {
+      observer.observe(videoContainerRef.current);
+    }
 
     if (videoElement) {
-      // First ScrollTrigger: Handles the expansion and parallax effect until the video reaches the center
       ScrollTrigger.create({
         trigger: videoElement,
-        start: 'top bottom', // Animation starts when the top of the video reaches the bottom of the viewport
-        end: 'center center',    // Animation ends when the video is centered in the viewport
-        scrub: true,             // Synchronizes the animation with the scrollbar position
+        start: 'top bottom',
+        end: 'center center',
+        scrub: true,
         onUpdate: (self) => {
-          const progress = self.progress;  // Progress of the animation from 0 to 1
-
-          // Calculate the width and height based on the progress
+          const progress = self.progress;
           const widthValue = initialWidth + progress * (maxWidth - initialWidth);
           const heightValue = initialHeight + progress * (maxHeight - initialHeight);
+          const yValue = -progress * 20;
 
-          // Parallax effect: Move the video upward slightly
-          const yValue = -progress * 20;  // Adjust the multiplier to control the parallax intensity
-
-          // Apply the calculated styles to the video element
           gsap.set(videoElement, {
             width: `${widthValue}%`,
             height: `${heightValue}vh`,
@@ -56,50 +80,121 @@ const DynamicVideo: React.FC<DynamicVideoProps> = ({
           });
         },
       });
-
-      // Second ScrollTrigger: Maintains the full size and stops further upward movement
-      ScrollTrigger.create({
-        trigger: videoElement,
-        start: 'center center',   // Starts when the video is centered in the viewport
-        end: 'bottom top',        // Ends when the bottom of the video exits the top of the viewport
-        scrub: true,
-        onUpdate: () => {
-          // Keep the width and height at maximum values
-          gsap.set(videoElement, {
-            width: `${maxWidth}%`,
-            height: `${maxHeight}vh`,
-            y: -20,  // Fixed y-value to maintain the position
-            ease: 'power2.out',
-          });
-        },
-      });
     }
 
-    // Clean up function to kill the ScrollTriggers when the component unmounts
     return () => {
+      window.removeEventListener('resize', checkIfMobile);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [initialWidth, maxWidth, initialHeight, maxHeight]); // Dependencies array includes the props
+  }, [initialWidth, maxWidth, initialHeight, maxHeight]);
 
-  // Render the video container and the video element
+  const playFullVideo = () => {
+    if (isMobile) {
+      setIsModalOpen(true); // Open modal on mobile when play is clicked
+    } else {
+      setIsPreview(false);
+      setIsPlaying(true);
+      setIsMuted(false);
+      if (videoElementRef.current) {
+        videoElementRef.current.src = fullVideoSrc;
+        videoElementRef.current.muted = false;
+        videoElementRef.current.play();
+      }
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Close modal
+    setIsPlaying(false); // Stop playing when modal is closed
+  };
+
+  const toggleMute = () => {
+    if (videoElementRef.current) {
+      videoElementRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!isMobile) {
+      const videoBounds = videoContainerRef.current?.getBoundingClientRect();
+      if (videoBounds) {
+        const x = event.clientX - videoBounds.left;
+        const y = event.clientY - videoBounds.top;
+        setCursorPosition({ x, y });
+      }
+    }
+  };
+
   return (
     <div
-      ref={videoRef}                  // Attach the ref to the container div
-      className="relative mx-auto overflow-hidden"
+      ref={videoContainerRef}
+      className="relative mx-auto overflow-hidden cursor-pointer"
       style={{
-        width: `${initialWidth}%`,    // Set the initial width
-        height: `${initialHeight}vh`, // Set the initial height
+        width: `${initialWidth}%`,
+        height: `${initialHeight}vh`,
       }}
+      onMouseMove={handleMouseMove}
+      onClick={isPreview ? playFullVideo : toggleMute}
     >
+      {/* Custom cursor for desktop, simple text for mobile */}
+      {isMobile ? (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          {!isPlaying && <span className="text-white bg-black bg-opacity-50 p-2 rounded-lg text-lg">play</span>}
+        </div>
+      ) : (
+        <div
+          className="absolute pointer-events-none z-10"
+          style={{
+            top: `${cursorPosition.y}px`,
+            left: `${cursorPosition.x}px`,
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          <span className="text-white bg-black bg-opacity-50 p-2 rounded-lg text-lg">
+            {isPlaying ? 'pause' : 'play'}
+          </span>
+        </div>
+      )}
+
       <video
-        className="object-cover rounded-lg"
-        style={{ width: '100%', height: '100%' }} // Ensure the video fills its container
-        src={videoSrc}       // Video source URL
-        autoPlay             // Automatically start playing
-        loop                 // Loop the video
-        muted                // Mute the video
-        playsInline          // Allow inline playback on mobile devices
+        ref={videoElementRef}
+        className="object-cover rounded-lg cursor-none"
+        style={{ width: '100%', height: '100%' }}
+        src={isLazyLoaded && !isPreview ? fullVideoSrc : previewVideoSrc}
+        autoPlay
+        loop={isPreview}
+        muted={isPreview || isMuted}
+        playsInline
       />
+
+      {/* Mute button (only visible during full video playback) */}
+      {isPlaying && !isPreview && (
+        <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-20">
+          <button
+            className="text-white bg-black bg-opacity-50 p-2 rounded-lg"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMute();
+            }}
+          >
+            {isMuted ? (
+              <FontAwesomeIcon icon={faVolumeMute} className="h-6 w-6 text-white" />
+            ) : (
+              <FontAwesomeIcon icon={faVolumeUp} className="h-6 w-6 text-white" />
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* Mobile Video Modal */}
+      {isMobile && (
+        <MobileVideoModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          videoSrc={fullVideoSrc}
+        />
+      )}
     </div>
   );
 };
