@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SatelliteMotion from './ufo/SatelliteMotion';
-import { ContactModal } from './contact-modal';
+import { ContactModal } from './ui/contact-modal';
 import DynamicText from './ui/DynamicText_hero';
 import skyVideo from '../assets/Parallax_images/sky_vid.mp4';
 import mountainsImage from '../assets/Parallax_images/mountains_dark.png';

@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import ServicesHoverAccordion from './ui/ServiceHoverAccordion';
-import { ContactModal } from './contact-modal'; // Import the ContactModal component
+import { ContactModal } from './ui/contact-modal'; // Import the ContactModal component
 import ramLogo from '../assets/Brand-images/ram_logo_desktop.png'; 
 
 interface HeaderProps {

@@ -5,7 +5,7 @@ import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Map from './Map'; // Assuming you have a Map component
-import { ContactModal } from './contact-modal'; // Import the contact-modal component
+import { ContactModal } from './ui/contact-modal'; // Import the contact-modal component
 
 export default function Footer() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
